@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
 int main(int argc, char *argv[]) {
+char nome[30], email[15], assento[5][5], tipo_participantes, data[10], hora[10];
+int cpf;
+printf("digite o nome: ");
+scanf("%s",nome);
+printf("Bem vindo %s", nome);
+
+
 	return 0;
 }
+
