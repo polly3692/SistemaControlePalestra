@@ -78,6 +78,7 @@
 				break;
 			default :
 				printf("escolha invalida!\n");
+				menu();
 		}
 	}
 	
@@ -181,6 +182,9 @@
 //				printf("assentos restantes aluno %d\n", assento_aluno);
 			}
 		}
+		
+		p_list[posicao_lista] = participante;//colocando a variavel (participante) na 1 posiçao que estiver vazia  
+		
 //		system("pause"); // SERVE APENAS PARA PARAR O PROGRAMA MOMENTANEAMENTE
 		menu(); // VOLTAR PARA O MENU
 	}
@@ -188,16 +192,39 @@
 	
 	void sorteio(){
 		int i;
+		int i_sorteio = 0;
+		int usuario_sorteado;
+
+		Participante p_sorteio [75];//struct 
 		printf("\nAssentos Sorteados");
 		srand(time(NULL));
-		for (i = 0; i < 6; i++){
+		
+		for (i = 0; i < 100; i++){
+				
+			if(p_list[i].tipo_participante == 2 ){
+				p_sorteio [i_sorteio] = p_list[i]; // p_sorteio na posição [i_sorteio} vai ser igual ao p_list na posição i
+				i_sorteio++; // [I] SIGNIFICA PECORRER A LISTA DO SORTEIO
+			}
 			
-			/*gerando numeros aleatorios entre zero e 75*/
-			printf("\t%d",rand() % 75);
 		}
-	    getch();
+		int p_aux[75];//posição auxiliar
+		i = 0;
+		while ( i < 6 ){
+	   	
+		   /*gerando numeros aleatorios entre zero e 75*/
+			usuario_sorteado =(rand()% i_sorteio);
+			if (p_aux[usuario_sorteado]== 0){
+				p_aux[usuario_sorteado]= 1;
+				printf("%s\n",p_sorteio[usuario_sorteado].escolha_de_assento);	
+				i++;
+			}
+			
+//	    	getch();
+		}
+	
 		system("PAUSE");
 		menu();
+		
 	}
        
 	   // ESCOLHA DE ASSENTO
