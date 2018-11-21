@@ -16,8 +16,8 @@
 	
 	typedef struct{
 			char nome[30], email [15], escolha_de_assento[5];
-		    int cpf, tipo_participante;
 			float data , horas;
+		    int cpf, tipo_participante;
 			bool cadeirante;
 	}Participante;
 	
@@ -28,14 +28,16 @@
 	int assento_cadeirante = 5;
 	int assento_aluno = 75;
 	char assentos [10][10]={{" "}};
-	
-	//============ CHAMADA DE FUNÇÕES ============
+    Participante p_list[100];
+
+	//============ DECLARAÇÃO DE FUNÇÕES ============
     //( CHAMAR EM OUTRAS FUNCOES)	
 	void cadastro();
 	void sorteio();
 	void menu();
 	void mostrarFileira(char assentos[10][10]);
     void selecionar_assento();
+	int verificar_lista(); // função que retorna inteiro
 	//	void verificar_vagas();
 	
 	//============ Função Principal ============
@@ -118,7 +120,7 @@
 		
 		// *****ESCOLHA DE TIPO DE PARTICIPANTE
 	
-		printf("\nDigite 1 professor/convidado, Digite 2 aluno");
+		printf("\nDigite 1 professor/convidado, Digite 2 aluno\n");
 		fflush(stdin);
 		scanf("%d",&participante.tipo_participante);
 			
@@ -145,7 +147,18 @@
 		system("cls");// limpa tela
 		mostrarFileira(assentos); // mostrar os assentos da tela
 //		printf("Depois da funcao mostrarFileira\n\n");
-	
+		
+		int posicao_lista;// posição da lista vai ser igual ao valor que a função retorna
+		posicao_lista = verificar_lista();
+		printf("posição vazia da lista encontrada :%d\n", posicao_lista);
+		system("pause");
+		if(posicao_lista >=100){
+			printf(" não há mais assentos\n");
+			system("pause");
+			menu();
+		}
+		
+		
 		
 		selecionar_assento();
 		
@@ -204,6 +217,7 @@
 		escolha_coluna --; 
 //		printf("escolha de coluna: %d\n", escolha_coluna); 
 		
+		
 		if(participante.tipo_participante == 1 && escolha_fileira > 7  ){// CASO O TIPO DE PARIICIPANTE SEJA PROFESSOR (1)  E SUA ESCOLHA SEJA I OU j
 			assentos[ escolha_fileira][escolha_coluna] = 'x';
 		} 
@@ -213,8 +227,18 @@
 			printf(" voce não pode escolher essa fileira\n");
 //			printf(" escolha de fileira: %d\n",escolha_fileira);
 //			printf(" tipo de participante: %d\n",participante.tipo_participante);
-//			
+//		                                                                                                                           	
 			selecionar_assento();//chamar função seleção de assento novamente 
 		}		
+	
 	} 
+	int verificar_lista(){
+		int i;
+		for (i =0; i<100; i++){
+			if(p_list[i].escolha_de_assento[0]=='\0'){// verificando se o assento de elemento da lista esta vazio
+				break;	
+			}	
+		} 		
+		return i; //retornando a posição que esta vazia na lista 
+	}
 	
