@@ -1,14 +1,14 @@
 	#include <stdio.h>
-	#include <windows.h>
+//	#include <windows.h>
 	#include <time.h>
-	#include <stdlib.h>
-	#include <conio.h>
-
-	SYSTEMTIME tempo; 
+    #include <stdlib.h>
+//	#include <conio.h>
+    //#include <bits/stdc++.h>
+	#define SYSTEMTIME tempo; 
 	
-	//**** definiçao de boleana
+	// definiï¿½ao de booleana
 	
-	typedef int bool; //DEFINIÇÃO TIPO VARIAVEL BOOLEANA
+	typedef int bool; //definiï¿½ao tipo variavel booleana
 	#define verdadeira 1
 	#define falso 0
 	
@@ -30,18 +30,19 @@
 	char assentos [10][10]={{" "}};
     Participante p_list[100];
 
-	//============ DECLARAÇÃO DE FUNÇÕES ============
-    //( CHAMAR EM OUTRAS FUNCOES)	
-	void cadastro();
+	//============ DECLARAï¿½ï¿½O DE FUNï¿½ï¿½ES ============
+    
+	//           CHAMAR EM OUTRAS FUNCOES
+	void cadastro();   
 	void sorteio();
 	void menu();
 	void mostrarFileira(char assentos[10][10]);
     void selecionar_assento();
-	int verificar_lista(); // função que retorna inteiro
+	int verificar_lista(); // funï¿½ï¿½o que retorna inteiro
 	//	void verificar_vagas();
 	
-	//============ Função Principal ============
-	// (1 FUNÇÃO QUE RODA)
+	//============ Funï¿½ï¿½o Principal ============
+	//           1ï¿½ FUNï¿½ï¿½O QUE RODA
 	int main(){
 		
 		
@@ -51,17 +52,19 @@
 		printf("  Palestra Direito LGBTs\n");//imprime o nome da palestra;
 		
 		printf ("\nLocal: Teatro Unip");	
-			GetLocalTime(&tempo);
-			printf("\n\nData Atual %d/%d/%d", tempo.wDay ,tempo.wMonth ,tempo.wYear);//imprime dia, mes e ano
-			printf("\tHora: %d - Min %d", tempo.wHour, tempo.wMinute); //imprime hora e minuto
+
+		time_t t = time(NULL);
+		struct tm tm = *localtime(&t);
+			printf("\n\nData Atual %d/%d/%d", tm.tm_mday ,tm.tm_mon ,tm.tm_year);//imprime dia, mes e ano
+			printf("\tHora: %d - Min %d", tm.tm_hour, tm.tm_min); //imprime hora e minuto
 		
 		menu();
 	
 		return 0;
 	}
-	//============ Funções ============
+	//============ Funï¿½ï¿½es ============
 	
-	//*** abre o menu de opçoes;
+	//*** abre o menu de opï¿½oes;
 	void menu(){
 		int escolha;
 		printf("\nDigite opcao desejada de 1 a 2:\n");
@@ -98,11 +101,11 @@
 		}	
 	}
 	
-	// função que realiza cadastro do usuario;
+	// funï¿½ï¿½o que realiza cadastro do usuario;
 	void cadastro (){
 		fflush(stdin);
 		
-		//****CADASTRO DE INFORMAÇOES PESSOAIS
+		//****CADASTRO DE INFORMAï¿½OES PESSOAIS
 		
 		printf("\n\nParticipante: "); //imprime o nome participante; 
 		fflush(stdin);
@@ -149,12 +152,12 @@
 		mostrarFileira(assentos); // mostrar os assentos da tela
 //		printf("Depois da funcao mostrarFileira\n\n");
 		
-		int posicao_lista;// posição da lista vai ser igual ao valor que a função retorna
+		int posicao_lista;// posiï¿½ï¿½o da lista vai ser igual ao valor que a funï¿½ï¿½o retorna
 		posicao_lista = verificar_lista();
-		printf("posição vazia da lista encontrada :%d\n", posicao_lista);
+		printf("posiï¿½ï¿½o vazia da lista encontrada :%d\n", posicao_lista);
 		system("pause");
 		if(posicao_lista >=100){
-			printf(" não há mais assentos\n");
+			printf(" nï¿½o hï¿½ mais assentos\n");
 			system("pause");
 			menu();
 		}
@@ -183,7 +186,7 @@
 			}
 		}
 		
-		p_list[posicao_lista] = participante;//colocando a variavel (participante) na 1 posiçao que estiver vazia  
+		p_list[posicao_lista] = participante;//colocando a variavel (participante) na 1 posiï¿½ao que estiver vazia  
 		
 //		system("pause"); // SERVE APENAS PARA PARAR O PROGRAMA MOMENTANEAMENTE
 		menu(); // VOLTAR PARA O MENU
@@ -202,12 +205,12 @@
 		for (i = 0; i < 100; i++){
 				
 			if(p_list[i].tipo_participante == 2 ){
-				p_sorteio [i_sorteio] = p_list[i]; // p_sorteio na posição [i_sorteio} vai ser igual ao p_list na posição i
+				p_sorteio [i_sorteio] = p_list[i]; // p_sorteio na posiï¿½ï¿½o [i_sorteio} vai ser igual ao p_list na posiï¿½ï¿½o i
 				i_sorteio++; // [I] SIGNIFICA PECORRER A LISTA DO SORTEIO
 			}
 			
 		}
-		int p_aux[75];//posição auxiliar
+		int p_aux[75];//posiï¿½ï¿½o auxiliar
 		i = 0;
 		while ( i < 6 ){
 	   	
@@ -232,7 +235,7 @@
 		
 		printf("\nSelecione o assento. Exemplo:'A 2'\n"); // 
 		fflush(stdin);
-		scanf("%[^\n]s",participante.escolha_de_assento);// LÊ ATE O USUARIO SELECIONAR O ENTER
+		scanf("%[^\n]s",participante.escolha_de_assento);// Lï¿½ ATE O USUARIO SELECIONAR O ENTER
 	//	printf("\nescolha_de_assento: %s", escolha_de_assento);
 	    
 		int escolha_fileira = participante.escolha_de_assento[0] - 65;// pegado a escolha da fileira. 65 na tabela ascii = A
@@ -240,7 +243,7 @@
 	    fflush(stdin);
 		
 		int escolha_coluna;
-		sscanf(participante.escolha_de_assento, "%*[^0-9]%d", &escolha_coluna); // pegando somente o inteiro do conteúdo do endereço da variavel de escolha de assento
+		sscanf(participante.escolha_de_assento, "%*[^0-9]%d", &escolha_coluna); // pegando somente o inteiro do conteï¿½do do endereï¿½o da variavel de escolha de assento
 		escolha_coluna --; 
 //		printf("escolha de coluna: %d\n", escolha_coluna); 
 		
@@ -251,11 +254,11 @@
 		else if (participante.tipo_participante == 2 && escolha_fileira <= 7){
 			assentos[ escolha_fileira][escolha_coluna] = 'x';
 		}else{ 
-			printf(" voce não pode escolher essa fileira\n");
+			printf(" voce nï¿½o pode escolher essa fileira\n");
 //			printf(" escolha de fileira: %d\n",escolha_fileira);
 //			printf(" tipo de participante: %d\n",participante.tipo_participante);
 //		                                                                                                                           	
-			selecionar_assento();//chamar função seleção de assento novamente 
+			selecionar_assento();//chamar funï¿½ï¿½o seleï¿½ï¿½o de assento novamente 
 		}		
 	
 	} 
@@ -266,6 +269,6 @@
 				break;	
 			}	
 		} 		
-		return i; //retornando a posição que esta vazia na lista 
+		return i; //retornando a posiï¿½ï¿½o que esta vazia na lista 
 	}
 	
