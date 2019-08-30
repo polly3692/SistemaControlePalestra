@@ -1,9 +1,9 @@
 	#include <stdio.h>
-//	#include <windows.h>
+	#include <windows.h>
 	#include <time.h>
     #include <stdlib.h>
-//	#include <conio.h>
-    //#include <bits/stdc++.h>
+	#include <conio.h>
+    #include <bits/stdc++.h>
 	#define SYSTEMTIME tempo; 
 	
 	// defini�ao de booleana
@@ -15,7 +15,7 @@
 	//============ STRUCT( definir tipo de variavel (TIPO PARTICIPANTE)============
 	
 	typedef struct{
-			char nome[30], email [15], escolha_de_assento[5];
+			char name[30], email [14], escolha_de_assento[5];
 			float data , horas;
 		    int cpf, tipo_participante;
 			bool cadeirante;
@@ -24,7 +24,7 @@
 	//***Variaveis globais ( PODEM SER ACESSADAS EM QUALQUER LUGAR DO ARQUIVO )
 	
 	Participante participante;
-	int assento_professor = 20;
+	int assento_professores = 20;
 	int assento_cadeirante = 5;
 	int assento_aluno = 75;
 	char assentos [10][10]={{" "}};
